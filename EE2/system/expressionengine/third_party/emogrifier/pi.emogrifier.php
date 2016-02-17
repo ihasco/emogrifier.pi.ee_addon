@@ -27,19 +27,22 @@ class Emogrifier {
 
     function Emogrifier() {
 
-        $this->EE =& get_instance();
-
-        $html = $this->EE->TMPL->tagdata;
+        // Get the HTML
+        $html = ee()->TMPL->tagdata;
 
         if ($html != "") {
 
             // Initiate Emogrifier Library
             $emogrifier = new \Pelago\Emogrifier();
 
+            // Set the HTML
             $emogrifier->setHtml($html);
 
             // Get the CSS
-            if ($css = file_get_contents($this->EE->TMPL->fetch_param('css'))) {
+            $css = trim(ee()->TMPL->fetch_param('css'), "/");
+
+            // Set the CSS
+            if ($css = file_get_contents($css)) {
                 $emogrifier->setCss($css);
             }
 
@@ -56,11 +59,11 @@ class Emogrifier {
     {
     ob_start();
     ?>
-This plug-in is designed to help you encode and decode a string of text so that it can be safely passed from one page to another in the URL (for example).
+This plug-in is designed to help you inline CSS with HTML. Example uses would be to inline CSS for page speed purposes or in order to create more robust HTML email templates for use with third party ExpressionEngine modules.
 
 BASIC USAGE:
 
-{exp:emogrifier css="assets/css/email.css"}My HTML email template{/exp:emogrifier}
+{exp:emogrifier css="/assets/css/email.css"}My HTML email template{/exp:emogrifier}
 
 PARAMETERS:
 
@@ -72,6 +75,10 @@ RELEASE NOTES:
 1.0 - Initial Release.
 
 For updates and support check the developers website: http://github.com/ihasco/Emogrifier
+
+THANKS:
+
+This add-on was inspired by and uses the 'Emogrifer' PHP library written by John Reeve.
     <?php
     $buffer = ob_get_contents();
 

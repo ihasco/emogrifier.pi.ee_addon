@@ -3,11 +3,19 @@ This plug-in is designed to help you inline CSS with HTML. Example uses would be
 
 BASIC USAGE:
 
-    {exp:emogrifier css="assets/css/email.css"}My HTML email template{/exp:emogrifier}
+    {exp:emogrifier css="/assets/css/email.css"}<h1>My HTML</h1>{/exp:emogrifier}
+    
+with perhaps a CSS file as follows:
+    
+    h1 { color: red; }
+    
+which would output:
+    
+    <h1 style="color: red;">My HTML</h1>
 
 PARAMETERS:
 
-css = 'assets/css/email.css' (optional)
+css = '/assets/css/email.css' (optional)
  - The css file that you want to emogrify with your HTML
 
 RELEASE NOTES:

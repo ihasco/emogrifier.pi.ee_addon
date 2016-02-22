@@ -32,18 +32,26 @@ class Emogrifier {
 
         if ($html != "") {
 
+            // Sometimes Emogrifier returns DOMXPath warnings, prevent that
+            error_reporting(0);
+
             // Initiate Emogrifier Library
             $emogrifier = new \Pelago\Emogrifier();
 
             // Set the HTML
             $emogrifier->setHtml($html);
 
-            // Get the CSS
-            $css = trim(ee()->TMPL->fetch_param('css'), "/");
+            // Has an external CSS file been specified?
+            if (ee()->TMPL->fetch_param('css')) {
 
-            // Set the CSS
-            if ($css = file_get_contents($css)) {
-                $emogrifier->setCss($css);
+                // Get the CSS (and trim leading slash)
+                $css = trim(ee()->TMPL->fetch_param('css'), "/");
+
+                // Set the CSS
+                if ($css = file_get_contents($css)) {
+                    $emogrifier->setCss($css);
+                }
+
             }
 
             // Emogrify the HTML and CSS

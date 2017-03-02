@@ -82,7 +82,7 @@ RELEASE NOTES:
 
 1.0 - Initial Release.
 
-For updates and support check the developers website: http://github.com/ihasco/Emogrifier
+For updates and support check the developers website: https://github.com/ihasco/emogrifier.pi.ee_addon
 
 THANKS:
 
